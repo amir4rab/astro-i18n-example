@@ -1,0 +1,43 @@
+---
+import ReactCounter from '../../components/react/counter';
+import PreactCounter from '../../components/preact/counter';
+import { type Locale, __t, locales } from "../../lib/i18n";
+
+export async function getStaticPaths() {
+  return [
+    { params: { locale: "en" } },
+    { params: { locale: "fr" } },
+    { params: { locale: "de" } }
+  ]
+}
+
+const { locale } = Astro.params;
+const t = __t.bind(null, locale as Locale)
+---
+
+<html lang={ locale }>
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{t("title")}</title>
+	</head>
+	<body>
+		<h1>{t("title")}</h1>
+    <p>{locale}</p>
+		<div>
+			<ReactCounter client:load />
+			<PreactCounter client:load />
+		</div>
+		<footer>
+			<p>Also available in:</p>
+			<ul>
+				{
+					locales.map((l) => (locale !== l && <li><a href={`/${l}/`}>{ l }</a></li>))
+				}
+			</ul>
+		</footer>
+	</body>
+</html>
+ 

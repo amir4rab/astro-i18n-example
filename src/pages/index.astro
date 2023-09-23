@@ -1,22 +1,4 @@
 ---
-import ReactCounter from '../components/react/counter';
-import PreactCounter from '../components/preact/counter';
 ---
-
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro I18n Example</h1>
-		<div>
-			<ReactCounter client:load />
-			<PreactCounter client:load />
-		</div>
-	</body>
-</html>
- 
+<!-- Redirecting users to the /en/ page -->
+<meta http-equiv="refresh" content="0;url=/en/" />
