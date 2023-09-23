@@ -27,18 +27,20 @@ reactLocale.value = locale as Locale;
 		<meta name="generator" content={Astro.generator} />
 		<title>{t("title")}</title>
 	</head>
-	<body>
-		<h1>{t("title")}</h1>
-    <p>{locale}</p>
-		<div>
+	<body class="prose md:mx-auto md:my-12 p-8 md:p-0">
+		<div class="flex justify-center items-center flex-col">
+			<h1 class="mb-2">{t("title")}</h1>
+			<p class="my-0">{locale}</p>
+		</div>
+		<div class="grid gap-2 bg-neutral-100 p-4 my-10 rounded-xl">
 			<ReactCounter transition:persist client:load />
 			<PreactCounter transition:persist client:load />
 		</div>
-		<footer>
-			<p>Also available in:</p>
-			<ul>
+		<footer class="grid gap-2 bg-neutral-100 p-4 rounded-xl">
+			<p class="my-0 text-sm">Also available in:</p>
+			<ul class="flex gap-2 list-none my-0 justify-start px-0">
 				{
-					locales.map((l) => (locale !== l && <li><a href={`/${l}/`}>{ l }</a></li>))
+					locales.map((l) => (locale !== l && <li class="my-0 uppercase"><a href={`/${l}/`}>{ l }</a></li>))
 				}
 			</ul>
 		</footer>
