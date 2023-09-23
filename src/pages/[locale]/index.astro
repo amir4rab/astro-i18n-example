@@ -1,4 +1,5 @@
 ---
+import { ViewTransitions } from 'astro:transitions';
 import ReactCounter from '../../components/react/counter';
 import PreactCounter from '../../components/preact/counter';
 import { type Locale, __t, locales, preactLocale, reactLocale } from "../../lib/i18n";
@@ -19,6 +20,7 @@ reactLocale.value = locale as Locale;
 
 <html lang={ locale }>
 	<head>
+		<ViewTransitions />
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
@@ -29,8 +31,8 @@ reactLocale.value = locale as Locale;
 		<h1>{t("title")}</h1>
     <p>{locale}</p>
 		<div>
-			<ReactCounter client:load />
-			<PreactCounter client:load />
+			<ReactCounter transition:persist client:load />
+			<PreactCounter transition:persist client:load />
 		</div>
 		<footer>
 			<p>Also available in:</p>
@@ -52,6 +54,8 @@ reactLocale.value = locale as Locale;
 		if ( currentLocale !== reactLocale.peek() ) reactLocale.value = currentLocale;
 	}
 
+	
+	document.addEventListener('astro:after-swap', hydrateLocale)
 	hydrateLocale();
 </script>
  
