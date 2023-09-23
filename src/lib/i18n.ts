@@ -1,3 +1,6 @@
+import { signal as preactSignal } from "@preact/signals";
+import { signal as reactSignal } from "@preact/signals-react";
+
 /** Translations */
 const translations = {
   en: {
@@ -24,3 +27,14 @@ export const __t = (
   locale: Locale = "en",
   key: keyof (typeof translations)["en"]
 ) => translations[locale]?.[key];
+
+/** Locale signal */
+export const preactLocale = preactSignal<Locale>("en");
+export const reactLocale = reactSignal<Locale>("en");
+
+/** Extracts the locale from the url */
+export const getLocale = (url: URL | Location): Locale => {
+  const [, locale = ""] = url.pathname.split("/");
+  if (locales.includes(locale as Locale)) return locale as Locale;
+  return "en" as Locale;
+};
