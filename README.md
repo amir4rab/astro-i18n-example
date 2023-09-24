@@ -4,12 +4,14 @@
 
 ### Why does this blog exist?
 
-You might rightfully say, that Astro docs provide a recipe about how to implement i18n, but the problem with the official guide is that it doesn’t provide information on how to use the translations in libraries such as React, Preact or Svelte. 
+You might rightfully say, that Astro docs provide a recipe about how to implement i18n, but the problem with the official guide is that it doesn’t provide information on how to use the translations in libraries such as React, Preact or Svelte.
 
 ## Why Astro?
+
 Astro may not be as popular as Next or Nuxt, but it offers a unique frontend development experience by allowing you to use your favourite frontend libraries, server-side render them, do client-side routing with animations or ship your website without any client-side javascript. ( keep in mind this means, there won’t be any js bound interactivity! )
 
 ### What do you need to know?
+
 Basic knowledge of Astro, Server-side rendering and client-side hydration is needed for a complete understanding of our i18n process.
 
 ## Stages
@@ -20,19 +22,25 @@ In the first stage, we need to provide translations for our server-rendered comp
 
 ### Stage one
 
+![hydration overview](/assets/hydration.jpg)
+
 In the next stage, we need to provide the selected locale to the rendering library before it starts the hydration. Keep in mind if we delay this part, we will cause a hydration error.
 
 ### Stage two - Optional
 
-In case you’re using the awesome Astro view transitions, we need to check the selected locale after each route change. 
+![hydration overview](/assets/default-navigation.jpg) 
+![hydration overview](/assets/clinet-side-navigation.jpg)
+
+In case you’re using the awesome Astro view transitions, we need to check the selected locale after each route change.
 
 ## Implementation
 
 ### Stage zero
 
 #### Setting up basic i18n system
-Firstly we need to add our translation file. In this file, we need to export our translations for each language. A basic example of it is displayed below. 
- 
+
+Firstly we need to add our translation file. In this file, we need to export our translations for each language. A basic example of it is displayed below.
+
 ```typescript
 // ---------------------------------------- //
 // -- Code Snippet 0-0                   -- //
@@ -157,8 +165,7 @@ localeSignal.value = locale as Locale;
 </html>
 ```
 
-By now we have completed the first stage, which means our components should have the needed translations for server-side 
-rendering.
+By now we have completed the first stage, which means our components should have the needed translations for server-side rendering.
 
 ### Stage one
 
@@ -189,8 +196,7 @@ At this stage, we have to hydrate the `locale` signal which will provide our cli
 </script>
 ```
 
-Now your components will have access to the current locale, the last missing part is to add a hook which returns the `__t` 
-function.
+Now your components will have access to the current locale, the last missing part is to add a hook which returns the `__t` function.
 
 ```tsx
 // ---------------------------------------- //
@@ -220,7 +226,6 @@ Finally, your components should have access to the `t` function which allows you
 ### Stage two
 
 At last, we have to add the `astro:transitions` to our pages which enables client-side navigation. After adding it to our header as displayed below,
-
 
 ```astro
 ---
