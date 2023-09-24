@@ -34,7 +34,9 @@ export const reactLocale = reactSignal<Locale>("en");
 
 /** Extracts the locale from the url */
 export const getLocale = (url: URL | Location): Locale => {
-  const [, locale = ""] = url.pathname.split("/");
+  // Since Github pages adds an extra part to the URL, we have to extract the locale from the
+  // third index of the array, otherwise it would be the second index!
+  const locale = url.pathname.split("/")[2];
   if (locales.includes(locale as Locale)) return locale as Locale;
   return "en" as Locale;
 };
