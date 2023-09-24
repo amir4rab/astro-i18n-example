@@ -6,6 +6,8 @@ import tailwind from "@astrojs/tailwind";
 
 // https://astro.build/config
 export default defineConfig({
+  site: "https://amir4rab.github.io",
+  base: "/astro-i18n-example",
   integrations: [
     preact({
       include: ["**/preact/*"],
