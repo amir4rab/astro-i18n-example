@@ -4,13 +4,7 @@ import ReactCounter from '../../components/react/counter';
 import PreactCounter from '../../components/preact/counter';
 import { type Locale, __t, locales, preactLocale, reactLocale } from "../../lib/i18n";
 
-export async function getStaticPaths() {
-  return [
-    { params: { locale: "en" } },
-    { params: { locale: "fr" } },
-    { params: { locale: "de" } }
-  ]
-}
+export const getStaticPaths = () => locales.map((locale) => ({ params: { locale } }));
 
 const { locale = 'en' } = Astro.params;
 const t = __t.bind(null, locale as Locale)
