@@ -3,6 +3,7 @@ import { ViewTransitions } from 'astro:transitions';
 import ReactCounter from '../../components/react/counter';
 import PreactCounter from '../../components/preact/counter';
 import { type Locale, __t, locales, preactLocale, reactLocale } from "../../lib/i18n";
+import "./styles.css";
 
 export const getStaticPaths = () => locales.map((locale) => ({ params: { locale } }));
 
@@ -21,16 +22,16 @@ reactLocale.value = locale as Locale;
 		<meta name="generator" content={Astro.generator} />
 		<title>{t("title")}</title>
 	</head>
-	<body class="prose md:mx-auto md:my-12 p-8 md:p-0">
+	<body class="prose dark:prose-invert md:mx-auto md:my-12 p-8 md:p-0">
 		<div class="flex justify-center items-center flex-col">
 			<h1 class="mb-2">{t("title")}</h1>
 			<p class="my-0">{locale}</p>
 		</div>
-		<div class="grid gap-2 bg-neutral-100 p-4 my-10 rounded-xl">
+		<div class="grid gap-8 bg-neutral-100 dark:bg-neutral-900 p-8 my-10 rounded-3xl">
 			<ReactCounter transition:persist client:load />
 			<PreactCounter transition:persist client:load />
 		</div>
-		<footer class="grid gap-2 bg-neutral-100 p-4 rounded-xl">
+		<footer class="grid gap-2 bg-neutral-100 dark:bg-neutral-900 p-8 rounded-3xl">
 			<p class="my-0 text-sm">Also available in:</p>
 			<ul class="flex gap-2 list-none my-0 justify-start px-0">
 				{
